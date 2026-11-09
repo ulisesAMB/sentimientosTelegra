@@ -281,6 +281,38 @@ periodo cubierto
 </section>
 
 </main> <!-- /main -->
+<script>
+
+(function () {
+
+  function envolver(t, n) { var w = t.split(" "), l = "", o = []; w.forEach(function (x) { if ((l + " " + x).trim().length > n) { o.push(l.trim()); l = x; } else { l += " " + x; } }); o.push(l.trim()); return o; }
+
+  function ajustar() {
+
+    if (window.innerWidth > 700 || !window.Plotly) return;
+
+    document.querySelectorAll(".js-plotly-plot").forEach(function (g) {
+
+      try {
+
+        var L = g.layout || {}, t = L.title && L.title.text, u = { "margin.r": 48, "margin.l": 6, "title.font.size": 13 };
+
+        if (t && t.indexOf("<br>") < 0) { var ls = envolver(t, 36); u["title.text"] = ls.join("<br>"); u["margin.t"] = 22 + 17 * ls.length; }
+
+        Plotly.relayout(g, u); Plotly.restyle(g, { cliponaxis: false });
+
+      } catch (e) {}
+
+    });
+
+  }
+
+  window.addEventListener("load", function () { setTimeout(ajustar, 1500); setTimeout(ajustar, 4000); });
+
+})();
+
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

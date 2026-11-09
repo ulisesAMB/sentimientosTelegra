@@ -561,6 +561,28 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">OK</td>
 <td style="text-align: left;">ejecucion</td>
 </tr>
+<tr class="even">
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">2026-11-09 04:56:00</td>
+<td style="text-align: left;">10. Sitio Quarto</td>
+<td style="text-align: left;">Rediseno final del sitio: menu lateral, burbujas, graficas interactivas</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">docs/</td>
+<td style="text-align: left;">OK</td>
+<td style="text-align: left;">ejecucion</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">2026-11-09 04:56:00</td>
+<td style="text-align: left;">11. Docentes</td>
+<td style="text-align: left;">Sentimientos por docente dentro de la pagina Evaluativo</td>
+<td style="text-align: right;">19317</td>
+<td style="text-align: right;">1570</td>
+<td style="text-align: left;">docs/evaluativo.html</td>
+<td style="text-align: left;">OK</td>
+<td style="text-align: left;">ejecucion</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -568,6 +590,38 @@ ul.task-list li input[type="checkbox"] {
 
 
 </main> <!-- /main -->
+<script>
+
+(function () {
+
+  function envolver(t, n) { var w = t.split(" "), l = "", o = []; w.forEach(function (x) { if ((l + " " + x).trim().length > n) { o.push(l.trim()); l = x; } else { l += " " + x; } }); o.push(l.trim()); return o; }
+
+  function ajustar() {
+
+    if (window.innerWidth > 700 || !window.Plotly) return;
+
+    document.querySelectorAll(".js-plotly-plot").forEach(function (g) {
+
+      try {
+
+        var L = g.layout || {}, t = L.title && L.title.text, u = { "margin.r": 48, "margin.l": 6, "title.font.size": 13 };
+
+        if (t && t.indexOf("<br>") < 0) { var ls = envolver(t, 36); u["title.text"] = ls.join("<br>"); u["margin.t"] = 22 + 17 * ls.length; }
+
+        Plotly.relayout(g, u); Plotly.restyle(g, { cliponaxis: false });
+
+      } catch (e) {}
+
+    });
+
+  }
+
+  window.addEventListener("load", function () { setTimeout(ajustar, 1500); setTimeout(ajustar, 4000); });
+
+})();
+
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
